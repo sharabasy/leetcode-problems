@@ -1,10 +1,12 @@
 function isAnagram(s: string, t: string): boolean {    
     if (s.length !== t.length) return false;
 
-    const w1 = s.split("").sort().join("");
-    const w2 = t.split("").sort().join("");
+    const freq = new Array(26).fill(0);
 
-    return (
-        w1 === w2 ? true : false
-    );
+    for(let i = 0; i < s.length; i++) {
+        freq[s.charCodeAt(i) - 97]++;
+        freq[t.charCodeAt(i) - 97]--;
+    };
+
+    return freq.every(char => char === 0);
 };
